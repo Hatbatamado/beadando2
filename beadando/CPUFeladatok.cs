@@ -54,12 +54,27 @@ namespace beadando
             }
         }
 
+        /// <summary>
+        /// A listában megadott elemek ütemezése 0/1 hátizsák probléma alapján
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="CPUVegesIdoKapacitas"></param>
+        /// <param name="HanySzimulaciosKorMaximum"></param>
         public void FeladatokUtemezes(LancoltLista<IFeladat> lista, int CPUVegesIdoKapacitas, int HanySzimulaciosKorMaximum)
         {
+            //lista elemek megszámolása a segéd tömbök miatt
             int db = 0;
             foreach (var item in lista)
                 db++;
 
+            //ha a lista üres, akkor minden feladat végre van hajtva, így további lépéseket nem kell végrehajtani
+            if (db == 0)
+            {
+                Console.WriteLine("Minden feladat végrehajtva!");
+                return;
+            }
+
+            //segéd tömbök
             int[] prioritasTomb = new int[db + 1];
             int[] idoIgenyTomb = new int[db + 1];
             int[,] Eredmeny = new int[db + 1, CPUVegesIdoKapacitas + 1];
@@ -67,19 +82,30 @@ namespace beadando
             prioritasTomb[0] = 0;
             idoIgenyTomb[0] = 0;
             
+            //segéd tömbök feltöltése
             int i = 1;
             foreach (var item in lista)
             {
                 prioritasTomb[i] = item.Prioritas;
                 idoIgenyTomb[i] = item.Idoigeny;
                 i++;
-            }
+            }           
 
+            //Feladatok kiválogatása 0/1 hátizsák probléma alapján
             Knapsack(CPUVegesIdoKapacitas, Eredmeny, db, idoIgenyTomb, prioritasTomb);
+            //Kiválogatott feladatok megjelenítése a felhasználónak és azok törlése a tömbből
             KnapsackKiolvasasa(db, CPUVegesIdoKapacitas, Eredmeny, idoIgenyTomb, prioritasTomb, lista, HanySzimulaciosKorMaximum);
            
         }
 
+        /// <summary>
+        /// 0/1 hátizsák probléma alapján a feladatok kiválogatása CPU időigény és prioritás szerint
+        /// </summary>
+        /// <param name="CPUVegesIdoKapacitas"></param>
+        /// <param name="Eredmeny"></param>
+        /// <param name="db"></param>
+        /// <param name="idoIgenyTomb"></param>
+        /// <param name="prioritasTomb"></param>
         private void Knapsack(int CPUVegesIdoKapacitas, int[,] Eredmeny, int db, int[] idoIgenyTomb, int[] prioritasTomb)
         {
             for (int x = 0; x < CPUVegesIdoKapacitas; x++)
@@ -97,9 +123,20 @@ namespace beadando
                 }
         }
 
+        /// <summary>
+        /// Kiválogatott feladatok megjelenítése a felhasználónak és azok törlése a tömbből
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="CPUVegesIdoKapacitas"></param>
+        /// <param name="Eredmeny"></param>
+        /// <param name="idoIgenyTomb"></param>
+        /// <param name="prioritasTomb"></param>
+        /// <param name="lista"></param>
+        /// <param name="HanySzimulaciosKorMaximum"></param>
         private void KnapsackKiolvasasa(int db, int CPUVegesIdoKapacitas, int[,] Eredmeny, int[] idoIgenyTomb,
             int[] prioritasTomb, LancoltLista<IFeladat> lista, int HanySzimulaciosKorMaximum)
         {
+            //kiválogatott elemek indexének kiolvasása
             int i = db;
             int x = CPUVegesIdoKapacitas;
             int a = 0;
@@ -114,6 +151,7 @@ namespace beadando
                 i--;
             }
 
+            //index alapján a feladatok megjelenítése eseménnyel majd azok törlése a listából
             foreach (var Sitem in S)
             {
                 if (Sitem != 0)
@@ -130,9 +168,8 @@ namespace beadando
                 }
             }
 
-            if (a == 0)
-                Console.WriteLine("Minden feladat végrehajtva!");
-
+            //végre nem hajtott elemek HanySzimulaciosKorOtaEl tulajdonságát 1-nel növeljük
+            //ha a növelt érték elérte a maximumot akkor kivételt dobunk
             foreach (var item in lista)
             {
                 item.HanySzimulaciosKorOtaEl++;
@@ -141,12 +178,28 @@ namespace beadando
             }
         }
         
+        /// <summary>
+        /// Esemény által kiíratjuk a végrehajtandó elemek időigényét és prioritását
+        /// </summary>
+        /// <param name="sender"></param>
         void item_FeladatBeutemezve(object sender)
         {
             if (sender is IFeladat)
             {
-                Console.WriteLine("Végrehajtandó feladat időgénye: " + ((IFeladat)sender).Idoigeny + " prioritása: " + ((IFeladat)sender).Prioritas);
+                Console.WriteLine("Végrehajtandó feladat időgénye: " + ((IFeladat)sender).Idoigeny + ", prioritása: " + ((IFeladat)sender).Prioritas);
             }
+        }
+
+        /// <summary>
+        /// Feladatok lista kiíratása
+        /// </summary>
+        /// <param name="lista"></param>
+        public void ListaKiir(LancoltLista<IFeladat> lista)
+        {
+            int i = 0;
+            foreach (var item in lista)
+                Console.WriteLine(++i + ". feladat időigénye: " + item.Idoigeny + ", prioritása: " + item.Prioritas +
+                    ", élet ciklusa felvétel óta: " + item.HanySzimulaciosKorOtaEl);
         }
     }
 }

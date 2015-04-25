@@ -23,6 +23,7 @@ namespace beadando
                 Console.WriteLine("*****MENU*****");
                 Console.WriteLine("  1. Feladat felvétel");
                 Console.WriteLine("  2. Feladatok ütemezése");
+                Console.WriteLine("  3. Feladatok kilistázása");
                 Console.WriteLine("  Esc - Kilépés");
                 Console.WriteLine();
                 key = Console.ReadKey();
@@ -30,6 +31,8 @@ namespace beadando
                     FeladatFelvetel();
                 if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2)
                     FeladatokUtemezese();
+                if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3)
+                    FeladatokKilistazasa();
             }
             while (key.Key != ConsoleKey.Escape);
 
@@ -148,6 +151,16 @@ namespace beadando
             {
                 Console.WriteLine(e.Message);
             }
+            Console.WriteLine();
+            Console.Write("A folytatáshoz nyomjon meg egy gombot");
+            Console.ReadKey();
+        }
+
+        static void FeladatokKilistazasa()
+        {
+            Console.WriteLine();
+            CPUMuveletek cpuMuv = new CPUMuveletek();
+            cpuMuv.ListaKiir(lista);
             Console.WriteLine();
             Console.Write("A folytatáshoz nyomjon meg egy gombot");
             Console.ReadKey();

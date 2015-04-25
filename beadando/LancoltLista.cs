@@ -16,6 +16,10 @@ namespace beadando
 
         ListaElem fej = null;
 
+        /// <summary>
+        /// Új elem beszúrása prioritás szerint megfelelő helyre
+        /// </summary>
+        /// <param name="elem"></param>
         public void BeszurasPrioritasSzerint(T elem)
         {
             ListaElem aktualis = fej;
@@ -42,6 +46,10 @@ namespace beadando
                 fej = uj;
         }
 
+        /// <summary>
+        /// Elem törlése a listából
+        /// </summary>
+        /// <param name="elem"></param>
         public void ElemTorles(IFeladat elem)
         {
             ListaElem aktualis = fej;
@@ -61,6 +69,9 @@ namespace beadando
             }
         }
 
+        /// <summary>
+        /// Lista bejárást segítő osztály
+        /// </summary>
         class ListaBejaro : IEnumerator<T>
         {
             ListaElem elso, jelenlegi;
@@ -102,6 +113,10 @@ namespace beadando
             }
         }
 
+        /// <summary>
+        /// Lista bejáráshoz szükséges enumerator
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
             return new ListaBejaro(fej);
