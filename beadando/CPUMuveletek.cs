@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace beadando
 {
-    class SzamitasiFeladat : CPUFeladatok
+    class CPUMuveletek : CPUFeladatok
     {
     }
 }

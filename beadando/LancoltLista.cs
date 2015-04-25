@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace beadando
 {
-    class LancoltLista<T> where T : IFeladat
+    class LancoltLista<T> : IEnumerable<T> where T : IFeladat
     {
         class ListaElem
         {
@@ -21,7 +21,7 @@ namespace beadando
             ListaElem aktualis = fej;
             ListaElem elozo = null;
             ListaElem kov = null;
-            while (aktualis != null && aktualis.tartalom.Prioritas > elem.Prioritas)
+            while (aktualis != null && aktualis.tartalom.Prioritas < elem.Prioritas)
             {
                 elozo = aktualis;
                 aktualis = aktualis.kovetkezo;
@@ -42,14 +42,74 @@ namespace beadando
                 fej = uj;
         }
 
-        //public void Listaz()
-        //{
-        //    ListaElem aktualis = fej;
-        //    while (aktualis != null)
-        //    {
-        //        Console.WriteLine(aktualis.tartalom);
-        //        aktualis = aktualis.kovetkezo;
-        //    }
-        //}
+        public void ElemTorles(IFeladat elem)
+        {
+            ListaElem aktualis = fej;
+            ListaElem elozo = null;
+
+            if (elem != null && aktualis != null)
+            {
+                while (((IFeladat)aktualis.tartalom) != elem && aktualis != null)
+                {
+                    elozo = aktualis;
+                    aktualis = aktualis.kovetkezo;
+                }
+                if (elozo != null)
+                    elozo.kovetkezo = aktualis.kovetkezo;
+                else if (aktualis != null)
+                    fej = aktualis.kovetkezo;
+            }
+        }
+
+        class ListaBejaro : IEnumerator<T>
+        {
+            ListaElem elso, jelenlegi;
+
+            public ListaBejaro(ListaElem elso)
+            {
+                this.elso = elso;
+            }
+
+            public T Current
+            {
+                get { return jelenlegi.tartalom; }
+            }
+
+            public void Dispose()
+            {
+                elso = null;
+                jelenlegi = null;
+            }
+
+            object System.Collections.IEnumerator.Current
+            {
+                get { return this.Current; }
+            }
+
+            public bool MoveNext()
+            {
+                if (jelenlegi == null)
+                    jelenlegi = elso;
+                else
+                    jelenlegi = jelenlegi.kovetkezo;
+
+                return jelenlegi != null;
+            }
+
+            public void Reset()
+            {
+                jelenlegi = null;
+            }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return new ListaBejaro(fej);
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

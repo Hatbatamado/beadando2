@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace beadando
 {
-    delegate void FeladatBeutemezveEsemeny();
+    delegate void FeladatBeutemezveEsemeny(object sender);
     interface IFeladat
     {
         int Prioritas { get; set; }

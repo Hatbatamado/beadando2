@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CPUFeladatok.cs" />
+    <Compile Include="CPUMuveletek.cs" />
+    <Compile Include="HanySzimulaciosKorMaximumException.cs" />
     <Compile Include="IFeladat.cs" />
     <Compile Include="LancoltLista.cs" />
     <Compile Include="Program.cs" />
