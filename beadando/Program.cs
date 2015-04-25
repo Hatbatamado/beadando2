@@ -9,10 +9,10 @@ namespace beadando
     class Program
     {
         public const int CPUVegesIdoKapacitas = 5;
-        public const int HanySzimulaciosKorMaximum = 1;
+        public const int HanySzimulaciosKorMaximum = 2;
         static LancoltLista<IFeladat> lista = new LancoltLista<IFeladat>();
 
-        enum FeladatokEnum { SzamitasiFeladat };
+        enum FeladatokEnum { SzamitasiFeladat, MerevlemezIO, SorosPortIO };
 
         static void Main(string[] args)
         {
@@ -32,8 +32,6 @@ namespace beadando
                     FeladatokUtemezese();
             }
             while (key.Key != ConsoleKey.Escape);
-
-
 
             /*SzamitasiFeladat szf = new SzamitasiFeladat();
             szf.Idoigeny = 2;
@@ -68,11 +66,17 @@ namespace beadando
                 Console.Clear();
                 Console.WriteLine("*****Feladat felvétel*****");
                 Console.WriteLine("  1. Szamitasi feladat");
+                Console.WriteLine("  2. MerevlemezIO feladat");
+                Console.WriteLine("  3. SorosPortIO feladat");
                 Console.WriteLine("  Esc - Vissza");
                 Console.WriteLine();
                 key = Console.ReadKey();
                 if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1)
                     Feladatok(FeladatokEnum.SzamitasiFeladat);
+                if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2)
+                    Feladatok(FeladatokEnum.MerevlemezIO);
+                if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3)
+                    Feladatok(FeladatokEnum.SorosPortIO);
             }
             while (key.Key != ConsoleKey.Escape);
         }
@@ -83,7 +87,19 @@ namespace beadando
             do
             {
                 Console.Clear();
-                Console.WriteLine("Számitási feladat");
+                switch (feladat)
+                {
+                    case FeladatokEnum.SzamitasiFeladat:
+                        Console.WriteLine("Számitási feladat");
+                        break;
+                    case FeladatokEnum.MerevlemezIO:
+                        Console.WriteLine("MerevlemezIO feladat");
+                        break;
+                    case FeladatokEnum.SorosPortIO:
+                        Console.WriteLine("SorosPortIO feladat");
+                        break;
+                }
+                
                 Console.Write("A feladat időigénye: ");
                 string idoIgeny = Console.ReadLine();
                 Console.Write("A feladat prioritása: ");
@@ -99,6 +115,18 @@ namespace beadando
                             szf.Idoigeny = ido;
                             szf.Prioritas = prio;
                             lista.BeszurasPrioritasSzerint(szf);
+                            break;
+                        case FeladatokEnum.MerevlemezIO:
+                            MerevlemezIO mIO = new MerevlemezIO();
+                            mIO.Idoigeny = ido;
+                            mIO.Prioritas = prio;
+                            lista.BeszurasPrioritasSzerint(mIO);
+                            break;
+                        case FeladatokEnum.SorosPortIO:
+                            SorosPortIO spIO = new SorosPortIO();
+                            spIO.Idoigeny = ido;
+                            spIO.Prioritas = prio;
+                            lista.BeszurasPrioritasSzerint(spIO);
                             break;
                     }
                 }

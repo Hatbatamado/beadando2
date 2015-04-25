@@ -45,9 +45,12 @@
     <Compile Include="CPUMuveletek.cs" />
     <Compile Include="HanySzimulaciosKorMaximumException.cs" />
     <Compile Include="IFeladat.cs" />
+    <Compile Include="IOFeladat.cs" />
     <Compile Include="LancoltLista.cs" />
+    <Compile Include="MerevlemezIO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SorosPortIO.cs" />
     <Compile Include="SzamitasiFeladat.cs" />
   </ItemGroup>
   <ItemGroup>
