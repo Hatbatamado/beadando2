@@ -60,7 +60,8 @@ namespace beadando
         /// <param name="lista"></param>
         /// <param name="CPUVegesIdoKapacitas"></param>
         /// <param name="HanySzimulaciosKorMaximum"></param>
-        public void FeladatokUtemezes(LancoltLista<IFeladat> lista, int CPUVegesIdoKapacitas, int HanySzimulaciosKorMaximum)
+        public void FeladatokUtemezes(LancoltLista<IFeladat> lista, int CPUVegesIdoKapacitas,
+            int HanySzimulaciosKorMaximum)
         {
             //lista elemek megszámolása a segéd tömbök miatt
             int db = 0;
@@ -94,7 +95,8 @@ namespace beadando
             //Feladatok kiválogatása 0/1 hátizsák probléma alapján
             Knapsack(CPUVegesIdoKapacitas, Eredmeny, db, idoIgenyTomb, prioritasTomb);
             //Kiválogatott feladatok megjelenítése a felhasználónak és azok törlése a tömbből
-            KnapsackKiolvasasa(db, CPUVegesIdoKapacitas, Eredmeny, idoIgenyTomb, prioritasTomb, lista, HanySzimulaciosKorMaximum);
+            KnapsackKiolvasasa(db, CPUVegesIdoKapacitas, Eredmeny, idoIgenyTomb, prioritasTomb, lista,
+                HanySzimulaciosKorMaximum);
            
         }
 
@@ -186,7 +188,8 @@ namespace beadando
         {
             if (sender is IFeladat)
             {
-                Console.WriteLine("Végrehajtandó feladat időgénye: " + ((IFeladat)sender).Idoigeny + ", prioritása: " + ((IFeladat)sender).Prioritas);
+                Console.WriteLine("Végrehajtandó feladat időgénye: " + ((IFeladat)sender).Idoigeny +
+                    ", prioritása: " + ((IFeladat)sender).Prioritas);
             }
         }
 
