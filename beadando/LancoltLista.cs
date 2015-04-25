@@ -17,7 +17,7 @@ namespace beadando
         ListaElem fej = null;
 
         /// <summary>
-        /// Új elem beszúrása prioritás szerint megfelelő helyre
+        /// Új elem beszúrása prioritás szerint megfelelő helyre növekvő sorrendben
         /// </summary>
         /// <param name="elem"></param>
         public void BeszurasPrioritasSzerint(T elem)
