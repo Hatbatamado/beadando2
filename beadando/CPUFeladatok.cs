@@ -111,9 +111,9 @@ namespace beadando
         private void Knapsack(int CPUVegesIdoKapacitas, int[,] Eredmeny, int db, int[] idoIgenyTomb, int[] prioritasTomb)
         {
             for (int x = 0; x <= CPUVegesIdoKapacitas; x++)
-                Eredmeny[0, x] = 8;
+                Eredmeny[0, x] = 0;
             for (int j = 1; j <= db; j++)
-                Eredmeny[j, 0] = 9;
+                Eredmeny[j, 0] = 0;
 
             for (int j = 1; j <= db; j++)
                 for (int x = 1; x <= CPUVegesIdoKapacitas; x++)
