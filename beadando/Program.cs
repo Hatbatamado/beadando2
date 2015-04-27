@@ -149,7 +149,9 @@ namespace beadando
             }
             catch(HanySzimulaciosKorMaximumException e)
             {
+                //hiba üzenet, hogy a feladat átlépte a maximum időtartamú életciklust, majd a feladat törlése a listából
                 Console.WriteLine(e.Message);
+                lista.ElemTorles(e.Elem);
             }
             Console.WriteLine();
             Console.Write("A folytatáshoz nyomjon meg egy gombot");

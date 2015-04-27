@@ -203,6 +203,8 @@ namespace beadando
             foreach (var item in lista)
                 Console.WriteLine(++i + ". feladat időigénye: " + item.Idoigeny + ", prioritása: " + item.Prioritas +
                     ", élet ciklusa felvétel óta: " + item.HanySzimulaciosKorOtaEl);
+            if (i == 0)
+                Console.WriteLine("Nincs feladat felvéve!");
         }
     }
 }
