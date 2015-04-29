@@ -113,6 +113,9 @@ namespace beadando
             } while (ujra);
         }
 
+        /// <summary>
+        /// 3 fajta feladat lehet felvenni, enum szerint meghívja felvételt intéző metódust
+        /// </summary>
         static void FeladatFelvetel()
         {
             ConsoleKeyInfo key;
@@ -136,6 +139,11 @@ namespace beadando
             while (key.Key != ConsoleKey.Escape);
         }
 
+        /// <summary>
+        /// enum alapján kiírja a megfelelő szöveget a felhasználónak,  majd a bekért adatok alapján
+        /// ha azok helyesek, akkor létrehoz belőlük egy példányt és hozzáadja a listához
+        /// </summary>
+        /// <param name="feladat"></param>
         static void Feladatok(FeladatokEnum feladat)
         {
             bool ujra = false;
@@ -191,6 +199,9 @@ namespace beadando
             while (ujra);
         }
 
+        /// <summary>
+        /// Feladatok ütemezése 0/1 hátizsák probléma alapján
+        /// </summary>
         static void FeladatokUtemezese()
         {
             Console.WriteLine();
@@ -210,6 +221,9 @@ namespace beadando
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Felvett feladatok kilistázása
+        /// </summary>
         static void FeladatokKilistazasa()
         {
             Console.WriteLine();
