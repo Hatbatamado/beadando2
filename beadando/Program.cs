@@ -41,30 +41,6 @@ namespace beadando
                     SzimulaciosKorMax();
             }
             while (key.Key != ConsoleKey.Escape);
-
-            /*SzamitasiFeladat szf = new SzamitasiFeladat();
-            szf.Idoigeny = 2;
-            szf.Prioritas = 3;
-            SzamitasiFeladat szf2 = new SzamitasiFeladat();
-            szf2.Idoigeny = 3;
-            szf2.Prioritas = 4;
-            SzamitasiFeladat szf3 = new SzamitasiFeladat();
-            szf3.Idoigeny = 4;
-            szf3.Prioritas = 5;
-            SzamitasiFeladat szf4 = new SzamitasiFeladat();
-            szf4.Idoigeny = 5;
-            szf4.Prioritas = 6;
-
-            LancoltLista<IFeladat> lista = new LancoltLista<IFeladat>();
-            lista.BeszurasPrioritasSzerint(szf);
-            lista.BeszurasPrioritasSzerint(szf2);
-            lista.BeszurasPrioritasSzerint(szf3);
-            lista.BeszurasPrioritasSzerint(szf4);
-
-            CPUMuveletek cpuMuv = new CPUMuveletek();
-            cpuMuv.FeladatokUtemezes(lista, CPUVegesIdoKapacitas);
-
-            Console.ReadKey();*/
         }
 
         /// <summary>
