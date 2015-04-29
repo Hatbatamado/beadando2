@@ -8,8 +8,8 @@ namespace beadando
 {
     class Program
     {
-        public const int CPUVegesIdoKapacitas = 5;
-        public const int HanySzimulaciosKorMaximum = 2;
+        private static int CPUVegesIdoKapacitas = 5;
+        private static int HanySzimulaciosKorMaximum = 2;
         static LancoltLista<IFeladat> lista = new LancoltLista<IFeladat>();
 
         enum FeladatokEnum { SzamitasiFeladat, MerevlemezIO, SorosPortIO };
@@ -24,6 +24,8 @@ namespace beadando
                 Console.WriteLine("  1. Feladat felvétel");
                 Console.WriteLine("  2. Feladatok ütemezése");
                 Console.WriteLine("  3. Feladatok kilistázása");
+                Console.WriteLine("  4. CPU csere");
+                Console.WriteLine("  5. Szimulációs kör maximum beállítása");
                 Console.WriteLine("  Esc - Kilépés");
                 Console.WriteLine();
                 key = Console.ReadKey();
@@ -33,6 +35,10 @@ namespace beadando
                     FeladatokUtemezese();
                 if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3)
                     FeladatokKilistazasa();
+                if (key.Key == ConsoleKey.D4 || key.Key == ConsoleKey.NumPad4)
+                    CPUCsere();
+                if (key.Key == ConsoleKey.D5 || key.Key == ConsoleKey.NumPad5)
+                    SzimulaciosKorMax();
             }
             while (key.Key != ConsoleKey.Escape);
 
@@ -59,6 +65,52 @@ namespace beadando
             cpuMuv.FeladatokUtemezes(lista, CPUVegesIdoKapacitas);
 
             Console.ReadKey();*/
+        }
+
+        /// <summary>
+        /// Szimulációs kör maximum életciklus számát állítja be
+        /// </summary>
+        static void SzimulaciosKorMax()
+        {
+            ErtekBeallitas(false);
+        }
+
+        /// <summary>
+        /// CPU véges időkapacitását állítja be
+        /// </summary>
+        static void CPUCsere()
+        {
+            ErtekBeallitas(true);
+        }
+
+        /// <summary>
+        /// Paraméter alapján a CPU véges időkapacitását vagy a szimulációs kör max. életciklus számát állítja be
+        /// </summary>
+        /// <param name="CPU"></param>
+        private static void ErtekBeallitas(bool CPU)
+        {
+            bool ujra = false;
+            do
+            {
+                Console.Clear();
+                if (CPU)
+                    Console.WriteLine("A jelenlegi CPU véges időkapacításának értéke: " + CPUVegesIdoKapacitas);
+                else
+                    Console.WriteLine("A jelenlegi szimulációs kör maximum életciklus száma: " + HanySzimulaciosKorMaximum);
+                Console.Write("Az új érték: ");
+                string BeolvasottErtek = Console.ReadLine();
+                int ertek;
+                if (Int32.TryParse(BeolvasottErtek, out ertek))
+                {
+                    if (CPU)
+                        CPUVegesIdoKapacitas = ertek;
+                    else
+                        HanySzimulaciosKorMaximum = ertek;
+                    ujra = false;
+                }
+                else
+                    ujra = true;
+            } while (ujra);
         }
 
         static void FeladatFelvetel()
